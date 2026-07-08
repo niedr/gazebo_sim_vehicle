@@ -11,9 +11,6 @@
 
 using namespace std::chrono_literals;
 
-// ---------------------------------------------------------------------------
-// Key reader (same as drone project) – select-based ESC vs arrow key handling
-// ---------------------------------------------------------------------------
 class KeyReader
 {
 public:
@@ -66,9 +63,6 @@ private:
   struct termios orig_;
 };
 
-// ---------------------------------------------------------------------------
-// ROS2 node: keyboard → /car/cmd_vel (geometry_msgs/Twist)
-// ---------------------------------------------------------------------------
 class KeyboardControlNode : public rclcpp::Node
 {
 public:
@@ -77,7 +71,6 @@ public:
       key_reader_(std::make_unique<KeyReader>())
   {
     pub_ = this->create_publisher<geometry_msgs::msg::Twist>("/car/cmd_vel", 10);
-
     RCLCPP_INFO(this->get_logger(),
 R"(╔══════════════════════════════════════════╗
 ║         SPORTS CAR KEYBOARD CONTROLS     ║
@@ -88,7 +81,6 @@ R"(╔════════════════════════�
 ║  SPACE brake                            ║
 ║  ESC / ^C  exit                         ║
 ╚══════════════════════════════════════════╝)");
-
     timer_ = this->create_wall_timer(20ms, [this]() { update(); });
   }
 
@@ -97,9 +89,10 @@ private:
   rclcpp::TimerBase::SharedPtr timer_;
   std::unique_ptr<KeyReader> key_reader_;
 
-  double speed_  = 0.0;   // linear.x
-  double steer_  = 0.0;   // angular.z
+  double speed_        = 0.0;
+  double steer_        = 0.0;
   double speed_preset_ = 2.0;
+  double last_preset_  = 2.0;
 
   static constexpr double kMaxSpeed = 4.0;
   static constexpr double kMaxSteer = 2.5;
@@ -107,8 +100,6 @@ private:
   void update()
   {
     bool w = false, s = false, a = false, d = false;
-    bool up = false, down = false;
-
     while (true) {
       int c = key_reader_->getKey();
       if (c < 0) break;
@@ -119,28 +110,23 @@ private:
         case 'd': case 'D': d = true; break;
         case KeyReader::kUp:   speed_preset_ = std::min(kMaxSpeed, speed_preset_ + 0.5); break;
         case KeyReader::kDown: speed_preset_ = std::max(0.5, speed_preset_ - 0.5); break;
-        case ' ':
-          speed_ = 0.0;
-          steer_ = 0.0;
-          break;
-        case 3:
-        case 27:
-          rclcpp::shutdown();
-          return;
+        case ' ': speed_ = 0.0; steer_ = 0.0; break;
+        case 3: case 27: rclcpp::shutdown(); return;
         default: break;
       }
     }
-
-    if (w) { speed_ =  speed_preset_; }
-    else if (s) { speed_ = -speed_preset_ * 0.6; }
+    if (std::abs(speed_preset_ - last_preset_) > 0.01) {
+      last_preset_ = speed_preset_;
+      RCLCPP_INFO(this->get_logger(), "Speed preset: %.1f m/s", speed_preset_);
+    }
+    if (w)  speed_ = speed_preset_;
+    else if (s) speed_ = -speed_preset_ * 0.6;
     else if (speed_ != 0) { speed_ *= 0.90; if (std::abs(speed_) < 0.01) speed_ = 0; }
-
-    if (a) { steer_ =  kMaxSteer; }
-    else if (d) { steer_ = -kMaxSteer; }
+    if (a) steer_ = kMaxSteer;
+    else if (d) steer_ = -kMaxSteer;
     else { steer_ *= 0.85; if (std::abs(steer_) < 0.01) steer_ = 0; }
-
     auto msg = geometry_msgs::msg::Twist();
-    msg.linear.x  = speed_;
+    msg.linear.x = speed_;
     msg.angular.z = steer_;
     pub_->publish(msg);
   }

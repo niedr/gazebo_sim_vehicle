@@ -168,39 +168,47 @@
         <collision name="c"><geometry><box><size>0.5 0.3 0.15</size></box></geometry></collision>
       </link>
 
-      <link name="fl"><pose>0.15 0.2 0.1 0 1.5708 0</pose>
+      <link name="fl"><pose>0.15 0.2 0.1 0 0 0</pose>
         <inertial><mass>0.1</mass><inertia><ixx>1e-4</ixx><ixy>0</ixy><ixz>0</ixz><iyy>1e-4</iyy><iyz>0</iyz><izz>2e-4</izz></inertia></inertial>
-        <visual name="v"><geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry>
+        <visual name="v"><pose>0 0 0 1.5708 0 0</pose>
+          <geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry>
           <material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material>
         </visual>
-        <collision name="c"><geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry></collision>
+        <collision name="c"><pose>0 0 0 1.5708 0 0</pose>
+          <geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry>
       </link>
-      <link name="fr"><pose>0.15 -0.2 0.1 0 1.5708 0</pose>
+      <link name="fr"><pose>0.15 -0.2 0.1 0 0 0</pose>
         <inertial><mass>0.1</mass><inertia><ixx>1e-4</ixx><ixy>0</ixy><ixz>0</ixz><iyy>1e-4</iyy><iyz>0</iyz><izz>2e-4</izz></inertia></inertial>
-        <visual name="v"><geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry>
+        <visual name="v"><pose>0 0 0 1.5708 0 0</pose>
+          <geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry>
           <material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material>
         </visual>
-        <collision name="c"><geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry></collision>
+        <collision name="c"><pose>0 0 0 1.5708 0 0</pose>
+          <geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry>
       </link>
-      <link name="rl"><pose>-0.15 0.2 0.1 0 1.5708 0</pose>
+      <link name="rl"><pose>-0.15 0.2 0.1 0 0 0</pose>
         <inertial><mass>0.1</mass><inertia><ixx>1e-4</ixx><ixy>0</ixy><ixz>0</ixz><iyy>1e-4</iyy><iyz>0</iyz><izz>2e-4</izz></inertia></inertial>
-        <visual name="v"><geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry>
+        <visual name="v"><pose>0 0 0 1.5708 0 0</pose>
+          <geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry>
           <material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material>
         </visual>
-        <collision name="c"><geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry></collision>
+        <collision name="c"><pose>0 0 0 1.5708 0 0</pose>
+          <geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry>
       </link>
-      <link name="rr"><pose>-0.15 -0.2 0.1 0 1.5708 0</pose>
+      <link name="rr"><pose>-0.15 -0.2 0.1 0 0 0</pose>
         <inertial><mass>0.1</mass><inertia><ixx>1e-4</ixx><ixy>0</ixy><ixz>0</ixz><iyy>1e-4</iyy><iyz>0</iyz><izz>2e-4</izz></inertia></inertial>
-        <visual name="v"><geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry>
+        <visual name="v"><pose>0 0 0 1.5708 0 0</pose>
+          <geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry>
           <material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.2 0.2 0.2 1</diffuse></material>
         </visual>
-        <collision name="c"><geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry></collision>
+        <collision name="c"><pose>0 0 0 1.5708 0 0</pose>
+          <geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry>
       </link>
 
-      <joint name="fl_j" type="revolute"><parent>chassis</parent><child>fl</child><axis><xyz>1 0 0</xyz><limit><lower>-1e16</lower><upper>1e16</upper></limit></axis></joint>
-      <joint name="fr_j" type="revolute"><parent>chassis</parent><child>fr</child><axis><xyz>1 0 0</xyz><limit><lower>-1e16</lower><upper>1e16</upper></limit></axis></joint>
-      <joint name="rl_j" type="revolute"><parent>chassis</parent><child>rl</child><axis><xyz>1 0 0</xyz><limit><lower>-1e16</lower><upper>1e16</upper></limit></axis></joint>
-      <joint name="rr_j" type="revolute"><parent>chassis</parent><child>rr</child><axis><xyz>1 0 0</xyz><limit><lower>-1e16</lower><upper>1e16</upper></limit></axis></joint>
+      <joint name="fl_j" type="revolute"><parent>chassis</parent><child>fl</child><axis><xyz>0 1 0</xyz></axis></joint>
+      <joint name="fr_j" type="revolute"><parent>chassis</parent><child>fr</child><axis><xyz>0 1 0</xyz></axis></joint>
+      <joint name="rl_j" type="revolute"><parent>chassis</parent><child>rl</child><axis><xyz>0 1 0</xyz></axis></joint>
+      <joint name="rr_j" type="revolute"><parent>chassis</parent><child>rr</child><axis><xyz>0 1 0</xyz></axis></joint>
 
       <plugin filename="ignition-gazebo-diff-drive-system" name="gz::sim::systems::DiffDrive">
         <robotNamespace>car</robotNamespace>
