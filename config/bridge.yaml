@@ -1,0 +1,6 @@
+# ROS ↔ Gazebo Bridge for car controls
+- ros_topic_name: "/car/cmd_vel"
+  gz_topic_name: "/car/cmd_vel"
+  ros_type_name: "geometry_msgs/msg/Twist"
+  gz_type_name: "ignition.msgs.Twist"
+  direction: ROS_TO_GZ
