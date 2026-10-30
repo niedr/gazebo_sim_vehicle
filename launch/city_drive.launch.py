@@ -16,7 +16,7 @@ def generate_launch_description():
         ),
         ExecuteProcess(
             cmd=[
-                "ros2", "run", "ros_gz_bridge", "parameter_bridge",
+                "ros2", "run", "ros_gz_bridge", "static_bridge",
                 "--ros-args", "-p", f"config_file:={bridge_config}",
             ],
             output="screen",

@@ -176,6 +176,7 @@
         </visual>
         <collision name="c"><pose>0 0 0 1.5708 0 0</pose>
           <geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry>
+        </collision>
       </link>
       <link name="fr"><pose>0.15 -0.2 0.1 0 0 0</pose>
         <inertial><mass>0.1</mass><inertia><ixx>1e-4</ixx><ixy>0</ixy><ixz>0</ixz><iyy>1e-4</iyy><iyz>0</iyz><izz>2e-4</izz></inertia></inertial>
@@ -185,6 +186,7 @@
         </visual>
         <collision name="c"><pose>0 0 0 1.5708 0 0</pose>
           <geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry>
+        </collision>
       </link>
       <link name="rl"><pose>-0.15 0.2 0.1 0 0 0</pose>
         <inertial><mass>0.1</mass><inertia><ixx>1e-4</ixx><ixy>0</ixy><ixz>0</ixz><iyy>1e-4</iyy><iyz>0</iyz><izz>2e-4</izz></inertia></inertial>
@@ -194,6 +196,7 @@
         </visual>
         <collision name="c"><pose>0 0 0 1.5708 0 0</pose>
           <geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry>
+        </collision>
       </link>
       <link name="rr"><pose>-0.15 -0.2 0.1 0 0 0</pose>
         <inertial><mass>0.1</mass><inertia><ixx>1e-4</ixx><ixy>0</ixy><ixz>0</ixz><iyy>1e-4</iyy><iyz>0</iyz><izz>2e-4</izz></inertia></inertial>
@@ -203,6 +206,7 @@
         </visual>
         <collision name="c"><pose>0 0 0 1.5708 0 0</pose>
           <geometry><cylinder><radius>0.08</radius><length>0.05</length></cylinder></geometry>
+        </collision>
       </link>
 
       <joint name="fl_j" type="revolute"><parent>chassis</parent><child>fl</child><axis><xyz>0 1 0</xyz></axis></joint>
@@ -218,10 +222,10 @@
         <wheel_radius>0.08</wheel_radius>
         <topic>/cmd_vel</topic>
         <odom_topic>/odometry</odom_topic>
-        <min_velocity>-3</min_velocity>
-        <max_velocity>3</max_velocity>
-        <min_acceleration>-2</min_acceleration>
-        <max_acceleration>2</max_acceleration>
+        <min_velocity>-5</min_velocity>
+        <max_velocity>5</max_velocity>
+        <min_acceleration>-5</min_acceleration>
+        <max_acceleration>5</max_acceleration>
       </plugin>
     </model>
   </world>
